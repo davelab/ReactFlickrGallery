@@ -33,14 +33,12 @@ export default class Gallery extends  React.Component {
             currentImage: index,
             lightboxIsOpen: true,
         });
-
-        console.log(this.state.lightboxIsOpen, this.state.currentImage);
     }
 
     closeLightbox () {
         this.setState({
             currentImage: 0,
-            lightboxIsOpen: false,
+            lightboxIsOpen: false
         });
     }
 
