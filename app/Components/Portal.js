@@ -3,8 +3,8 @@ import Transition from 'react-addons-transition-group';
 import { render } from 'react-dom';
 
 const FirstChild = ({ children }) => {
-    let children = Children.toArray(children);
-    return children[0] || null;
+    let kids = Children.toArray(children);
+    return kids[0] || null;
 };
 
 export default class Portal extends Component {

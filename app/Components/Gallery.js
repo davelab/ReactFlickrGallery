@@ -1,7 +1,8 @@
 import React from 'react'
 import endpoint  from '../api/config'
 import Superagent from 'superagent'
-import Image from './Image.js'
+import Image from './Image'
+import Lightbox from './Lightbox'
 
 export default class Gallery extends  React.Component {
     constructor(props) {
@@ -14,7 +15,6 @@ export default class Gallery extends  React.Component {
             currentImage: 0
         }
 
-        this.openLightbox = this.openLightbox.bind(this)
     }
 
     componentDidMount() {
@@ -24,6 +24,14 @@ export default class Gallery extends  React.Component {
                 this.setState({
                     photos: res.body.photos.photo
                 })
+            })
+    }
+
+    getUserInfo(user_id) {
+        Superagent
+            .get(`${endpoint}&method=flickr.people.getInfo&user_id${user_id}`)
+            .end((err, res)  => {
+                return res
             })
     }
 
@@ -42,6 +50,18 @@ export default class Gallery extends  React.Component {
         });
     }
 
+    nextImage() {
+        this.setState({
+            currentImage: this.state.currentImage + 1,
+        })
+    }
+
+    prevImage() {
+        this.setState({
+            currentImage: this.state.currentImage - 1,
+        })
+    }
+
     render() {
         return(
             <div>
@@ -49,9 +69,22 @@ export default class Gallery extends  React.Component {
                     <Image
                         key={i}
                         image={photo}
+                        size="medium"
+                        user={this.getUserInfo(photo.owner)}
                         onClick={(e) => this.openLightbox(e, i)}
                     />
+
+
                 )}
+
+                <Lightbox
+                    currentImage= {this.state.currentImage}
+                    images= {this.state.photos}
+                    isOpen= {this.state.lightboxIsOpen}
+                    onClose= { () => this.closeLightbox() }
+                    onNext= { () => this.nextImage() }
+                    onPrev= { () => this.prevImage() }
+                    />
             </div>
         );
     }

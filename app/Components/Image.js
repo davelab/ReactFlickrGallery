@@ -1,17 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 
-
-
 export default class Image extends Component {
     constructor(props) {
         super(props);
     }
 
+    getImageSizeCode(size = 'small') {
+        switch (size) {
+            case "small":
+                return 's';
+                break;
+            case "medium":
+                return 'q';
+                break;
+            case "large":
+                return 'c';
+                break;
+            default:
+                return 's'
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.user);
+    }
+
     getFlickrPhotoUrl(image) {
-        return `https://farm${image.farm}.staticflickr.com/${image.server}/${image.id}_${image.secret}_s.jpg`;
+        const size = this.getImageSizeCode(this.props.size);
+        return `https://farm${image.farm}.staticflickr.com/${image.server}/${image.id}_${image.secret}_${size}.jpg`;
     }
     
     render() {
+
         return (
             <div>
                 <img
@@ -24,5 +44,6 @@ export default class Image extends Component {
 
 Image.PropTypes = {
     image: PropTypes.object.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    size: PropTypes.string
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Portal from './Portal'
+import Image from './Image'
 import '../sass/components/lightbox.scss'
 
 export default class Lightbox extends Component {
@@ -7,16 +8,46 @@ export default class Lightbox extends Component {
         super(props);
     }
 
-    renderImage() {
+    renderPrevButton() {
+        if (this.props.currentImage === 0) return;
+        return (
+            <span onClick={this.props.onPrev}> prev </span>
+        )
+    }
 
+    renderNextButton() {
+        if (this.props.currentImage === this.props.images.length - 1) return;
+        return (
+            <span onClick={this.props.onNext}> next </span>
+        )
+    }
+
+    renderImage() {
+        const { images, currentImage } = this.props;
+
+        if (!images || !images.length) return null;
+        const image = images[currentImage];
+        return(
+            <div className="image-container">
+
+                <Image image={image}
+                       size="large"
+                       onClick={null} />
+            </div>
+        )
     }
 
     renderModal() {
         if (!this.props.isOpen) return null;
 
         return (
-            <div>
-                {this.renderModal()}
+            <div className="lightbox">
+                <div className="lightbox-control" >
+                    <span onClick={this.props.onClose}> x </span>
+                    { this.renderPrevButton() }
+                    { this.renderNextButton() }
+                </div>
+                {this.renderImage()}
             </div>
         )
     }
