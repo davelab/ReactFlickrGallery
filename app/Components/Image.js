@@ -5,9 +5,6 @@ import React, { Component, PropTypes } from 'react';
 export default class Image extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            image: this.props.image
-        };
     }
 
     getFlickrPhotoUrl(image) {
@@ -18,7 +15,7 @@ export default class Image extends Component {
         return (
             <div>
                 <img
-                    src={this.getFlickrPhotoUrl(this.state.image)}
+                    src={this.getFlickrPhotoUrl(this.props.image)}
                     onClick={this.props.onClick} />
             </div>
         )
@@ -26,5 +23,6 @@ export default class Image extends Component {
 }
 
 Image.PropTypes = {
-    image: PropTypes.object.isRequired
+    image: PropTypes.object.isRequired,
+    onClick: PropTypes.func
 }
