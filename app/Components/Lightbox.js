@@ -1,24 +1,45 @@
 import React, { Component, PropTypes } from 'react'
 import Portal from './Portal'
-import Image from './Image'
+import utils from '../utils/urlBuilder'
 import '../sass/components/lightbox.scss'
 
 export default class Lightbox extends Component {
     constructor(props) {
         super(props);
+        this.state = { windowHeight: 0 };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isOpen) {
+            window.addEventListener('resize', this.resizeEvents);
+            this.resizeEvents();
+        } else {
+            window.removeEventListener('resize', this.resizeEvents);
+        }
+
+    }
+
+    resizeEvents() {
+        this.setState({
+            windowHeight: window.innerHeight || 0
+        })
     }
 
     renderPrevButton() {
         if (this.props.currentImage === 0) return;
         return (
-            <span onClick={this.props.onPrev}> prev </span>
+            <button onClick={this.props.onPrev} className="lightbox--arrow prev">
+                <i className="fa fa-angle-left"></i>
+            </button>
         )
     }
 
     renderNextButton() {
         if (this.props.currentImage === this.props.images.length - 1) return;
         return (
-            <span onClick={this.props.onNext}> next </span>
+            <button onClick={this.props.onNext} className="lightbox--arrow next">
+                <i className="fa fa-angle-right"></i>
+            </button>
         )
     }
 
@@ -27,12 +48,20 @@ export default class Lightbox extends Component {
 
         if (!images || !images.length) return null;
         const image = images[currentImage];
+
         return(
-            <div className="image-container">
-                <Image image={image}
-                       size="large"
-                       onClick={null} />
-                { currentImage + 1 } of { images.length }
+            <div className="lightbox--container">
+                <header className="lightbox--header">
+                    <button onClick={this.props.onClose}> <i className="fa fa-close"></i> </button>
+                </header>
+                <img
+                    src={utils.getFlickrPhotoUrl(image, 'large')}
+                    style={ { maxHeight: this.state.windowHeight} } />
+                <footer className="lightbox--footer">
+                    <div className="counter">
+                        { currentImage + 1 } of { images.length }
+                    </div>
+                </footer>
             </div>
         )
     }
@@ -42,12 +71,10 @@ export default class Lightbox extends Component {
 
         return (
             <div className="lightbox">
-                <div className="lightbox-control" >
-                    <span onClick={this.props.onClose}> x </span>
-                    { this.renderPrevButton() }
-                    { this.renderNextButton() }
-                </div>
+                <span className="fake-height"></span>
                 {this.renderImage()}
+                {this.renderPrevButton()}
+                {this.renderNextButton()}
             </div>
         )
     }

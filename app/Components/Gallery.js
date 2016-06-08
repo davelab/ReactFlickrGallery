@@ -5,7 +5,7 @@ import Image from './Image'
 import Lightbox from './Lightbox'
 import Loader from 'react-loader'
 
-
+import utils from '../utils/urlBuilder'
 
 export default class Gallery extends  React.Component {
     constructor(props) {
@@ -43,7 +43,7 @@ export default class Gallery extends  React.Component {
     getFlickrImages() {
         return new Promise((resolve, reject) => {
             Superagent
-                .get(`${endpoint}&method=flickr.photos.search&text="Weird Objects"&per_page=${this.state.perPage}&page=${this.state.page}`)
+                .get(`${endpoint}&method=flickr.photos.search&text="Weird+Objects"&per_page=${this.state.perPage}&page=${this.state.page}`)
                 .end((err, res)  => {
                     err ? reject(err) : resolve(res.body.photos.photo);
                 })

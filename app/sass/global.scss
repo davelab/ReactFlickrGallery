@@ -1,6 +1,11 @@
-@import 'breakpoints';
-
 body {
   font: 400 16px Helvetica, sans-serif;
   background-color: #fff;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
