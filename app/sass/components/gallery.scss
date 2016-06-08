@@ -1,0 +1,18 @@
+$image-size: 100px;
+
+.image-container{
+  display: block;
+  width: $image-size ;
+  height: $image-size;
+  overflow: hidden;
+  transform: rotate(45deg);
+  position: relative;
+
+  img{
+    transform: rotate(-45deg);
+    width: 200%;
+    position: absolute;
+    left: - $image-size / 2;
+    top: - $image-size / 2;
+  }
+}
