@@ -41,12 +41,14 @@ export default class Image extends Component {
     render() {
         const { image } = this.props;
         const { user } = image;
-        
+
         return (
             <div>
                 <img
                     src={this.getFlickrPhotoUrl(image)}
-                    onClick={this.props.onClick} />
+                    onClick={this.props.onClick}
+                    style={ { display: 'none' } }
+                />
                 <a href={ user.profileurl._content } target="_blank">
                     { this.renderAvatar(user) }
                     { user.username._content}

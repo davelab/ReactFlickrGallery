@@ -3,16 +3,18 @@ import endpoint  from '../api/config'
 import Superagent from 'superagent'
 import Image from './Image'
 import Lightbox from './Lightbox'
+import Loader from 'react-loader'
 
 export default class Gallery extends  React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loaded: false,
             photos: [],
             perPage: 10,
             page: 1,
             lightboxIsOpen: false,
-            currentImage: 0
+            currentImage: 0,
         }
         this.objPhotos = []
     }
@@ -30,7 +32,8 @@ export default class Gallery extends  React.Component {
                 });
 
                 this.setState({
-                    photos: uPhotos
+                    photos: uPhotos,
+                    loaded: true
                 })
             })
     }
@@ -82,27 +85,33 @@ export default class Gallery extends  React.Component {
         })
     }
 
+    renderImages() {
+        return (
+            this.state.photos.map((photo, i) =>
+                <Image
+                    key={i}
+                    image={photo}
+                    size="medium"
+                    user={this.getUserInfo(photo.owner)}
+                    onClick={(e) => this.openLightbox(e, i)}
+                />
+            )
+        )
+    }
+
     render() {
         return(
             <div>
-                {this.state.photos.map((photo, i) =>
-                    <Image
-                        key={i}
-                        image={photo}
-                        size="medium"
-                        user={this.getUserInfo(photo.owner)}
-                        onClick={(e) => this.openLightbox(e, i)}
-                    />
-                )}
-
-                <Lightbox
-                    currentImage= {this.state.currentImage}
-                    images= {this.state.photos}
-                    isOpen= {this.state.lightboxIsOpen}
-                    onClose= { () => this.closeLightbox() }
-                    onNext= { () => this.nextImage() }
-                    onPrev= { () => this.prevImage() }
-                />
+                <Loader loaded={this.state.loaded}>
+                    { this.renderImages() }
+                    <Lightbox
+                        currentImage= {this.state.currentImage}
+                        images= {this.state.photos}
+                        isOpen= {this.state.lightboxIsOpen}
+                        onClose= { () => this.closeLightbox() }
+                        onNext= { () => this.nextImage() }
+                        onPrev= { () => this.prevImage() } />
+                </Loader>
             </div>
         );
     }
