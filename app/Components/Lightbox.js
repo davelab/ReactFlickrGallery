@@ -11,10 +11,10 @@ export default class Lightbox extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
-            window.addEventListener('resize', this.resizeEvents);
+            window.addEventListener('resize', this.resizeEvents.bind(this));
             this.resizeEvents();
         } else {
-            window.removeEventListener('resize', this.resizeEvents);
+            window.removeEventListener('resize', this.resizeEvents.bind(this));
         }
 
     }

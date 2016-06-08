@@ -99,7 +99,6 @@ export default class Gallery extends  React.Component {
     }
 
     render() {
-        console.log(this.state);
         return(
             <div>
                 <Loader loaded={this.state.loaded}>
