@@ -13,6 +13,7 @@ $image-size: 120px;
   width: $image-size;
   height: $image-size;
   float: left;
+  cursor: pointer;
 
   &.rhombus {
     overflow: hidden;

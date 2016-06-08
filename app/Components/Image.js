@@ -31,7 +31,7 @@ export default class Image extends Component {
                         src={ utils.getFlickrPhotoUrl(image, this.props.size) }
                         onClick={this.props.onClick}
                     />
-                    <div class="avatar-container">
+                    <div className="avatar-container">
                         <a href={ user.profileurl._content } target="_blank">
                             { this.renderAvatar(user) }
                             { user.username._content}
