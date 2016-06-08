@@ -5,8 +5,6 @@ import Image from './Image'
 import Lightbox from './Lightbox'
 import Loader from 'react-loader'
 
-import utils from '../utils/urlBuilder'
-
 export default class Gallery extends  React.Component {
     constructor(props) {
         super(props);
@@ -101,6 +99,7 @@ export default class Gallery extends  React.Component {
     }
 
     render() {
+        console.log(this.state);
         return(
             <div>
                 <Loader loaded={this.state.loaded}>

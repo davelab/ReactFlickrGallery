@@ -61,6 +61,7 @@ export default class Lightbox extends Component {
                     <div className="counter">
                         { currentImage + 1 } of { images.length }
                     </div>
+                    <div className="description">{image.title}</div>
                 </footer>
             </div>
         )
