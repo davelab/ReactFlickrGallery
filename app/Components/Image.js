@@ -21,22 +21,36 @@ export default class Image extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps.user);
-    }
-
     getFlickrPhotoUrl(image) {
         const size = this.getImageSizeCode(this.props.size);
         return `https://farm${image.farm}.staticflickr.com/${image.server}/${image.id}_${image.secret}_${size}.jpg`;
     }
-    
-    render() {
 
+    getFlickrAvatarUrl(user) {
+        return `https://farm${user.iconfarm}.staticflickr.com/${user.iconserver}/buddyicons/${user.nsid}.jpg`;
+    }
+
+    renderAvatar(user) {
+        if (user.iconfarm == 0) return null;
+        return (
+            <img src={ this.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
+        );
+    }
+
+
+    render() {
+        const { image } = this.props;
+        const { user } = image;
+        
         return (
             <div>
                 <img
-                    src={this.getFlickrPhotoUrl(this.props.image)}
+                    src={this.getFlickrPhotoUrl(image)}
                     onClick={this.props.onClick} />
+                <a href={ user.profileurl._content } target="_blank">
+                    { this.renderAvatar(user) }
+                    { user.username._content}
+                </a>
             </div>
         )
     }
