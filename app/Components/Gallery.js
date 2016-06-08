@@ -100,7 +100,7 @@ export default class Gallery extends  React.Component {
 
     render() {
         return(
-            <div>
+            <div className="container">
                 <Loader loaded={this.state.loaded}>
                     { this.renderImages() }
                     <Lightbox

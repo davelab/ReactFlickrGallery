@@ -7,6 +7,9 @@ const _getImageSizeCode = (size) => {
             return 'q';
             break;
         case "large":
+            return 'z';
+            break;
+        case "x-large":
             return 'c';
             break;
         default:

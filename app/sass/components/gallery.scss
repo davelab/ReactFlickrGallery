@@ -1,23 +1,47 @@
 @import "../base/base";
 
-$image-size: 100px;
+$image-size: 120px;
+
+.container {
+  width: 980px;
+  margin: 0 auto;
+  @extend .clearfix;
+}
 
 .image-container{
   display: block;
-  width: $image-size ;
+  width: $image-size;
   height: $image-size;
+  float: left;
 
   &.rhombus {
     overflow: hidden;
     transform: rotate(45deg);
     position: relative;
+    margin: 50px 35px;
+    border-radius: 10px;
 
-    img{
+    .gallery-image{
       transform: rotate(-45deg);
-      width: 200%;
       position: absolute;
-      left: - $image-size / 2;
       top: - $image-size / 2;
+      left: - $image-size / 2;
+      width: 210px;
+      height: 210px;
+    }
+    .avatar-container {
+      background: #ccc;
+      width: $image-size;
+      height: $image-size;
+      transform: rotate(-45deg);
+      text-align: center;
+      line-height: $image-size;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
     }
   }
 }

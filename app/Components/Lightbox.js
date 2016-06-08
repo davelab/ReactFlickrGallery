@@ -55,7 +55,7 @@ export default class Lightbox extends Component {
                     <button onClick={this.props.onClose}> <i className="fa fa-close"></i> </button>
                 </header>
                 <img
-                    src={utils.getFlickrPhotoUrl(image, 'large')}
+                    src={utils.getFlickrPhotoUrl(image, 'x-large')}
                     style={ { maxHeight: this.state.windowHeight} } />
                 <footer className="lightbox--footer">
                     <div className="counter">

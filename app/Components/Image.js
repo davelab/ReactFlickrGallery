@@ -25,18 +25,20 @@ export default class Image extends Component {
         })
 
         return (
-            <div>
                 <div className={imageContainerStyle}>
                     <img
-                        src={ utils.getFlickrPhotoUrl(image, 'medium') }
+                        className="gallery-image"
+                        src={ utils.getFlickrPhotoUrl(image, this.props.size) }
                         onClick={this.props.onClick}
                     />
+                    <div class="avatar-container">
+                        <a href={ user.profileurl._content } target="_blank">
+                            { this.renderAvatar(user) }
+                            { user.username._content}
+                        </a>
+                    </div>
+
                 </div>
-                <a href={ user.profileurl._content } target="_blank">
-                    { this.renderAvatar(user) }
-                    { user.username._content}
-                </a>
-            </div>
         )
     }
 }
