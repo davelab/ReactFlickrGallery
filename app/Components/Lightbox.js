@@ -29,10 +29,10 @@ export default class Lightbox extends Component {
         const image = images[currentImage];
         return(
             <div className="image-container">
-
                 <Image image={image}
                        size="large"
                        onClick={null} />
+                { currentImage + 1 } of { images.length }
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import '../sass/components/gallery.scss'
 
 export default class Image extends Component {
     constructor(props) {
@@ -44,11 +45,12 @@ export default class Image extends Component {
 
         return (
             <div>
-                <img
-                    src={this.getFlickrPhotoUrl(image)}
-                    onClick={this.props.onClick}
-                    style={ { display: 'none' } }
-                />
+                <div className="image-container">
+                    <img
+                        src={this.getFlickrPhotoUrl(image)}
+                        onClick={this.props.onClick}
+                    />
+                </div>
                 <a href={ user.profileurl._content } target="_blank">
                     { this.renderAvatar(user) }
                     { user.username._content}
