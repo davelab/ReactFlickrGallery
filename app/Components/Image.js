@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames'
 import '../sass/components/gallery.scss'
 
 export default class Image extends Component {
@@ -43,9 +44,14 @@ export default class Image extends Component {
         const { image } = this.props;
         const { user } = image;
 
+        const imageContainerStyle = classNames({
+            'image-container' : true,
+            'rhombus' : this.props.rhombus
+        })
+
         return (
             <div>
-                <div className="image-container">
+                <div className={imageContainerStyle}>
                     <img
                         src={this.getFlickrPhotoUrl(image)}
                         onClick={this.props.onClick}
@@ -63,5 +69,12 @@ export default class Image extends Component {
 Image.PropTypes = {
     image: PropTypes.object.isRequired,
     onClick: PropTypes.func,
-    size: PropTypes.string
+    size: PropTypes.string,
+    rhombus: PropTypes.bool
 }
+
+
+Image.defaultProps = {
+    size: 's',
+    rhombus: false
+};

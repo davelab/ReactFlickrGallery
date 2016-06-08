@@ -94,9 +94,8 @@ export default class Gallery extends  React.Component {
                     key={i}
                     image={photo}
                     size="medium"
-                    user={this.getUserInfo(photo.owner)}
-                    onClick={(e) => this.openLightbox(e, i)}
-                />
+                    rhombus={true}
+                    onClick={(e) => this.openLightbox(e, i)} />
             )
         )
     }

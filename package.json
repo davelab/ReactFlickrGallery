@@ -19,6 +19,7 @@
   "homepage": "https://github.com/davelab/reactStarter#readme",
   "dependencies": {
     "babel-polyfill": "^6.8.0",
+    "classnames": "^2.2.5",
     "react": "^15.0.2",
     "react-addons-transition-group": "^15.1.0",
     "react-dom": "^15.0.2",
