@@ -9,10 +9,15 @@ export default class Image extends Component {
     }
 
     renderAvatar(user) {
-        if (user.iconfarm == 0) return null;
-        return (
-            <img src={ utils.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
-        );
+        if (user.iconfarm == 0) {
+            return (
+                <div className="default-avatar"></div>
+            )
+        }else {
+            return (
+                <img className="avatar" src={ utils.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
+            );
+        }
     }
 
     render() {
@@ -25,20 +30,17 @@ export default class Image extends Component {
         })
 
         return (
+            <div className="gallery-item">
                 <div className={imageContainerStyle}>
                     <img
                         className="gallery-image"
                         src={ utils.getFlickrPhotoUrl(image, this.props.size) }
                         onClick={this.props.onClick}
                     />
-                    <div className="avatar-container">
-                        <a href={ user.profileurl._content } target="_blank">
-                            { this.renderAvatar(user) }
-                            { user.username._content}
-                        </a>
-                    </div>
-
                 </div>
+                { this.renderAvatar(user) }
+            </div>
+
         )
     }
 }
