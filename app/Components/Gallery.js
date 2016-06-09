@@ -3,6 +3,7 @@ import endpoint  from '../api/config'
 import Superagent from 'superagent'
 import Image from './Image'
 import Lightbox from './Lightbox'
+import Pagination from './Pagination'
 import Loader from 'react-loader'
 
 export default class Gallery extends Component {
@@ -30,7 +31,8 @@ export default class Gallery extends Component {
 
         this.getFlickrImages(getPerPage, getPage)
             .then((photoData) => {
-                this.objPhotos.push(...photoData);
+                //this.objPhotos.push(...photoData);
+                this.objPhotos = photoData;
                 return Promise.all(photoData.map(this.getUserInfo))
             })
             .then((userData) => {
@@ -93,11 +95,20 @@ export default class Gallery extends Component {
         })
     }
 
-    morePhotos() {
+    nextPage() {
         this.setState({
-            perPage: this.state.perPage + 10
+            page: this.state.page + 1
+        }, () => {
+            this.createImagesSet();
         })
-        this.createImagesSet();
+    }
+
+    prevPage() {
+        this.setState({
+            page: this.state.page - 1
+        }, () => {
+            this.createImagesSet();
+        })
     }
 
     renderImages() {
@@ -114,6 +125,7 @@ export default class Gallery extends Component {
     }
 
     render() {
+
         return(
             <div>
                 <Loader loaded={this.state.loaded}>
@@ -127,7 +139,11 @@ export default class Gallery extends Component {
                         onPrev= { () => this.prevImage() } />
                 </Loader>
 
-                <div onClick={ () => this.morePhotos() }>MORE</div>
+                <Pagination
+                    onPrevPage={ () => this.prevPage() }
+                    onNextPage={ () => this.nextPage() }
+                    currentPage={ this.state.page } />
+
             </div>
         );
     }
