@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames'
-import '../sass/components/gallery.scss'
 import utils from '../utils/urlBuilder'
 
 export default class Image extends Component {
@@ -23,24 +22,20 @@ export default class Image extends Component {
     render() {
         const { image } = this.props;
         const { user } = image;
-
-        const imageContainerStyle = classNames({
-            'image-container' : true,
-            'rhombus' : this.props.rhombus
-        })
-
+        const backgroundImageStyle = {
+            backgroundImage : `url(${utils.getFlickrPhotoUrl(image, this.props.size)})`
+        }
         return (
             <div className="gallery-item">
-                <div className={imageContainerStyle}>
-                    <img
-                        className="gallery-image"
-                        src={ utils.getFlickrPhotoUrl(image, this.props.size) }
-                        onClick={this.props.onClick}
-                    />
-                </div>
-                { this.renderAvatar(user) }
+                    <div className="hexagon-shape hexagon-size">
+                        <div className="hexagon-inner">
+                            <div className="hexagon-image"
+                                 style={backgroundImageStyle}
+                                 onClick={this.props.onClick}>
+                            </div>
+                        </div>
+                    </div>
             </div>
-
         )
     }
 }

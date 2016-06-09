@@ -4,6 +4,7 @@ import Superagent from 'superagent'
 import Image from './Image'
 import Lightbox from './Lightbox'
 import Loader from 'react-loader'
+import '../sass/components/gallery.scss'
 
 export default class Gallery extends  React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class Gallery extends  React.Component {
         this.state = {
             loaded: false,
             photos: [],
-            perPage: 10,
+            perPage: 11,
             page: 1,
             lightboxIsOpen: false,
             currentImage: 0,
@@ -102,7 +103,9 @@ export default class Gallery extends  React.Component {
         return(
             <div className="container">
                 <Loader loaded={this.state.loaded}>
-                    { this.renderImages() }
+                    <div className="inner-container">
+                        { this.renderImages() }
+                    </div>
                     <Lightbox
                         currentImage= {this.state.currentImage}
                         images= {this.state.photos}
