@@ -7,14 +7,19 @@ export default class Image extends Component {
         super(props);
     }
 
+    goToUserPage(e, url) {
+        e.stopPropagation();
+        window.open(url,'_blank');
+    }
+
     renderAvatar(user) {
         if (user.iconfarm == 0) {
             return (
-                <div className="default-avatar"></div>
+                <div className="default-avatar" onClick={ (e) => this.goToUserPage(e, user.profileurl._content)}></div>
             )
         }else {
             return (
-                <img className="avatar" src={ utils.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
+                <img className="avatar" onClick={ (e) => this.goToUserPage(e, user.profileurl._content)} src={ utils.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
             );
         }
     }
@@ -32,10 +37,12 @@ export default class Image extends Component {
                             <div className="hexagon-image"
                                  style={backgroundImageStyle}
                                  onClick={this.props.onClick}>
+                                {this.renderAvatar(user)}
                             </div>
                         </div>
                     </div>
             </div>
+
         )
     }
 }

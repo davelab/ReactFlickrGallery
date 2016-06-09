@@ -55,11 +55,17 @@
 //}
 
 $avatar-size: 48px;
+
 .avatar {
   display: block;
   border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: -60px;
+  margin-top: - $avatar-size / 2;
   width: $avatar-size;
   height: $avatar-size;
+  transition: left 250ms ease 250ms;
   @extend .center;
 }
 .default-avatar {
@@ -84,6 +90,8 @@ $row-width: $shapes-row-width + $gap-row-width;
   position: relative;
   margin: 0 auto;
   transition: all ease 500ms;
+  min-height: 200px;
+
 
   .inner-container {
     padding-top: 1em;
@@ -98,6 +106,7 @@ $row-width: $shapes-row-width + $gap-row-width;
   position: relative;
   display: inline-block;
   margin-right: $gap;
+  overflow: hidden;
 
   &:nth-child(7n-2) {
     margin-left: $image-size / 2 + $gap / 2;
@@ -144,6 +153,9 @@ $row-width: $shapes-row-width + $gap-row-width;
 
   &:hover {
     box-shadow: inset 60px 0 0 0  rgba(0, 0, 0, 0.48);
+    .avatar {
+      left: 4px;
+    }
   }
 }
 

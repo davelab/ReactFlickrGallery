@@ -59,8 +59,8 @@ export default class Gallery extends  React.Component {
         })
     }
 
-    openLightbox (event, index) {
-        event.preventDefault();
+    openLightbox (e, index) {
+        e.preventDefault();
         this.setState({
             currentImage: index,
             lightboxIsOpen: true,
