@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import endpoint  from '../api/config'
 import Superagent from 'superagent'
+
 import Image from './Image'
 import Lightbox from './Lightbox'
 import Loader from 'react-loader'
+import Pagination from './Pagination'
+
 import '../sass/components/gallery.scss'
 
-export default class Gallery extends  React.Component {
+export default class Gallery extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -15,15 +19,23 @@ export default class Gallery extends  React.Component {
             perPage: 11,
             page: 1,
             lightboxIsOpen: false,
-            currentImage: 0,
+            currentImage: 0
         }
         this.objPhotos = []
     }
 
     componentDidMount() {
-        this.getFlickrImages()
+        this.createImagesSet()
+    }
+
+    createImagesSet(getPerPage = this.state.perPage, getPage = this.state.page ) {
+        this.setState({
+            loaded: false
+        })
+
+        this.getFlickrImages(getPerPage, getPage)
             .then((photoData) => {
-                this.objPhotos.push(...photoData);
+                this.objPhotos = photoData;
                 return Promise.all(photoData.map(this.getUserInfo))
             })
             .then((userData) => {
@@ -39,10 +51,10 @@ export default class Gallery extends  React.Component {
             })
     }
 
-    getFlickrImages() {
+    getFlickrImages(getPerPage, getPage) {
         return new Promise((resolve, reject) => {
             Superagent
-                .get(`${endpoint}&method=flickr.photos.search&text="Weird+Objects"&per_page=${this.state.perPage}&page=${this.state.page}`)
+                .get(`${endpoint}&method=flickr.photos.search&text="Weird Objects"&per_page=${getPerPage}&page=${getPage}`)
                 .end((err, res)  => {
                     err ? reject(err) : resolve(res.body.photos.photo);
                 })
@@ -86,6 +98,22 @@ export default class Gallery extends  React.Component {
         })
     }
 
+    nextPage() {
+        this.setState({
+            page: this.state.page + 1
+        }, () => {
+            this.createImagesSet();
+        })
+    }
+
+    prevPage() {
+        this.setState({
+            page: this.state.page - 1
+        }, () => {
+            this.createImagesSet();
+        })
+    }
+
     renderImages() {
         return (
             this.state.photos.map((photo, i) =>
@@ -114,7 +142,13 @@ export default class Gallery extends  React.Component {
                         onNext= { () => this.nextImage() }
                         onPrev= { () => this.prevImage() } />
                 </Loader>
+
+                <Pagination
+                    onPrevPage={ () => this.prevPage() }
+                    onNextPage={ () => this.nextPage() }
+                    currentPage={ this.state.page } />
             </div>
         );
     }
 }
+
