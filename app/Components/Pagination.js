@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import '../sass/components/pagination.scss'
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -8,27 +9,20 @@ export default class Pagination extends Component {
     renderPrevPageBtn() {
         if (this.props.currentPage == 1) return;
         return (
-                <button onClick={ this.props.onPrevPage }>prev</button>
+                <button className="btn btn--blue" onClick={ this.props.onPrevPage }>Prev</button>
             )
     }
     renderNextPageBtn() {
         return (
-                <button onClick={ this.props.onNextPage }>next</button>
+                <button className="btn btn--blue" onClick={ this.props.onNextPage }>Next </button>
             )
     }
-
-    renderCurrentPage() {
-        return(
-            <div>
-                Page { this.props.currentPage }
-            </div>
-        )
-    }
+    
 
     render() {
         return (
-            <div>
-                { this.renderPrevPageBtn() } ... { this.renderNextPageBtn() } { this.renderCurrentPage() }
+            <div className="pagination-container">
+                { this.renderPrevPageBtn() }  { this.renderNextPageBtn() } <p>Page { this.props.currentPage }</p>
             </div>
         )
     }

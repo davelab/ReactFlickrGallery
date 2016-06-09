@@ -1,0 +1,21 @@
+.btn {
+  padding: 5px 15px;
+  min-height: 1em;
+  text-align: center;
+  display: inline-block;
+  border-radius: 100px;
+  line-height: 1.2em;
+  font-size: 1em;
+  color: #000;
+  box-shadow: 0 0 0 1px #000 inset;
+  transition: all 250ms ease;
+
+  &--blue {
+    color: #397FBB;
+    box-shadow: 0 0 0 1px #397FBB inset;
+    &:hover {
+      background: #397FBB;
+      color: #fff;
+    }
+  }
+}
