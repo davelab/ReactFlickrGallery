@@ -128,6 +128,7 @@ export default class Gallery extends Component {
     }
 
     render() {
+
         return(
             <div className="container">
                 <Loader loaded={this.state.loaded}>
@@ -147,6 +148,7 @@ export default class Gallery extends Component {
                     onPrevPage={ () => this.prevPage() }
                     onNextPage={ () => this.nextPage() }
                     currentPage={ this.state.page } />
+
             </div>
         );
     }
