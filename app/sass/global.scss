@@ -17,3 +17,39 @@ a {
     color: #0abafc;
   }
 }
+
+$fixed-bar-height: 60px;
+
+.fixed-bar {
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  z-index: 500;
+  padding: 14px;
+  vertical-align: middle;
+  display: block;
+  background: #f2f2f2;
+  text-align: center;
+  left: 0;
+  height: $fixed-bar-height;
+
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    color: inherit;
+  }
+
+  &--top {
+    top: 0;
+    border-bottom: 1px solid #dedede;
+  }
+  &--bottom {
+    bottom: 0;
+    border-top: 1px solid #dedede;
+  }
+  p {
+    font-size: 12px;
+    color: #666;
+    display: inline-block;
+  }
+}

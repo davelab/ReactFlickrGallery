@@ -10,6 +10,9 @@ export default class App extends  React.Component {
     render() {
         return(
             <div>
+                <div className="fixed-bar fixed-bar--top">
+                    <h1>Weird Objects</h1>
+                </div>
                 <Gallery />
             </div>
             );

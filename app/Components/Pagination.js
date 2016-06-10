@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import '../sass/components/pagination.scss'
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -21,7 +20,7 @@ export default class Pagination extends Component {
 
     render() {
         return (
-            <div className="pagination-container">
+            <div className="fixed-bar fixed-bar--bottom">
                 { this.renderPrevPageBtn() }  { this.renderNextPageBtn() } <p>Page { this.props.currentPage }</p>
             </div>
         )

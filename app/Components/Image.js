@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames'
-import utils from '../utils/urlBuilder'
+import utils from '../utils'
 
 export default class Image extends Component {
     constructor(props) {
@@ -19,7 +18,7 @@ export default class Image extends Component {
             )
         }else {
             return (
-                <img className="avatar" onClick={ (e) => this.goToUserPage(e, user.profileurl._content)} src={ utils.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
+                <img className="avatar" onClick={ (e) => this.goToUserPage(e, user.profileurl._content)} src={ utils.urlBuilder.getFlickrAvatarUrl(user) } alt={ user.username._content }/>
             );
         }
     }
@@ -28,7 +27,7 @@ export default class Image extends Component {
         const { image } = this.props;
         const { user } = image;
         const backgroundImageStyle = {
-            backgroundImage : `url(${utils.getFlickrPhotoUrl(image, this.props.size)})`
+            backgroundImage : `url(${utils.urlBuilder.getFlickrPhotoUrl(image, this.props.size)})`
         }
         return (
             <div className="gallery-item">
