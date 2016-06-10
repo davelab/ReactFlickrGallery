@@ -121,7 +121,7 @@ $row-width: $shapes-row-width + $gap-row-width !default;
     &:nth-child(n+3) {
       margin-top: - $image-size / 2 + $gap / 2;
     }
-    &:nth-child(3n-3) {
+    &:nth-child(3n) {
       margin-left: $image-size / 2 + $gap / 2;
     }
   }
