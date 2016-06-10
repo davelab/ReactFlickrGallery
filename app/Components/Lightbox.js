@@ -52,6 +52,7 @@ export default class Lightbox extends Component {
         return(
             <div className="lightbox--container">
                 <header className="lightbox--header">
+                    <a href={utils.getPhotoPostUrl(image)} target="_blank"> <i className="fa fa-link"></i> Flickr Post</a>
                     <button onClick={this.props.onClose}> <i className="fa fa-close"></i> </button>
                 </header>
                 <img

@@ -27,7 +27,12 @@ const getFlickrAvatarUrl = (user) => {
     return `https://farm${user.iconfarm}.staticflickr.com/${user.iconserver}/buddyicons/${user.nsid}.jpg`;
 }
 
+const getPhotoPostUrl = (image) => {
+    return `https://www.flickr.com/photos/${image.owner}/${image.id}`
+}
+
 module.exports = {
     getFlickrAvatarUrl,
-    getFlickrPhotoUrl
+    getFlickrPhotoUrl,
+    getPhotoPostUrl
 }

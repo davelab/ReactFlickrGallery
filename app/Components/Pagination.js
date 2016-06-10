@@ -8,7 +8,7 @@ export default class Pagination extends Component {
 
     renderPrevPageBtn() {
         if (this.props.currentPage == 1) return;
-        return (
+        return  (
                 <button className="btn btn--blue" onClick={ this.props.onPrevPage }>Prev</button>
             )
     }

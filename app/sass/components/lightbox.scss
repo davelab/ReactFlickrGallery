@@ -18,6 +18,13 @@ $arrow-width: 60px;
   z-index: 1000;
   color: #fff;
 
+  a, a:hover {
+    font-size: 12px;
+    color: inherit;
+    display: block;
+    float: left;
+  }
+
   button {
     color: inherit;
   }
