@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Portal from './Portal'
-import utils from '../utils/urlBuilder'
+import utils from '../utils'
 import '../sass/components/lightbox.scss'
 
 export default class Lightbox extends Component {
@@ -11,12 +11,13 @@ export default class Lightbox extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
+            utils.bodyScroll.blockScroll();
             window.addEventListener('resize', this.resizeEvents.bind(this));
             this.resizeEvents();
         } else {
+            utils.bodyScroll.allowScroll();
             window.removeEventListener('resize', this.resizeEvents.bind(this));
         }
-
     }
 
     resizeEvents() {
@@ -52,11 +53,11 @@ export default class Lightbox extends Component {
         return(
             <div className="lightbox--container">
                 <header className="lightbox--header">
-                    <a href={utils.getPhotoPostUrl(image)} target="_blank"> <i className="fa fa-link"></i> Flickr Post</a>
+                    <a href={utils.urlBuilder.getPhotoPostUrl(image)} target="_blank"> <i className="fa fa-link"></i> Flickr Post</a>
                     <button onClick={this.props.onClose}> <i className="fa fa-close"></i> </button>
                 </header>
                 <img
-                    src={utils.getFlickrPhotoUrl(image, 'x-large')}
+                    src={utils.urlBuilder.getFlickrPhotoUrl(image, 'x-large')}
                     style={ { maxHeight: this.state.windowHeight} } />
                 <footer className="lightbox--footer">
                     <div className="counter">
