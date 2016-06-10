@@ -92,10 +92,10 @@ export default class Lightbox extends Component {
 }
 
 Lightbox.protoTypes = {
-    currentImage: PropTypes.number,
+    currentImage: PropTypes.number.isRequired,
     images: PropTypes.array.isRequired,
-    isOpen: PropTypes.bool,
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
     onClickNext: PropTypes.func,
-    onClickPrev: PropTypes.func,
-    onClose: PropTypes.func.isRequired
+    onClickPrev: PropTypes.func
 }

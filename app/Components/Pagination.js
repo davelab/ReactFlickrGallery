@@ -13,7 +13,7 @@ export default class Pagination extends Component {
     }
     renderNextPageBtn() {
         return (
-                <button className="btn btn--blue" onClick={ this.props.onNextPage } disabled={!this.props.isGalleryLoaded}>Next </button>
+                <button className="btn btn--blue" onClick={ this.props.onNextPage } disabled={!this.props.isGalleryLoaded}>Next</button>
             )
     }
     
@@ -25,4 +25,11 @@ export default class Pagination extends Component {
             </div>
         )
     }
+}
+
+Pagination.PropTypes = {
+    currentPage: PropTypes.number.isRequired,
+    isGalleryLoaded: PropTypes.bool.isRequired,
+    onNextPage: PropTypes.func.isRequired,
+    onPrevPage: PropTypes.func.isRequired
 }
