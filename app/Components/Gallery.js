@@ -127,13 +127,26 @@ export default class Gallery extends Component {
         )
     }
 
-    render() {
+    renderPagination() {
+        if (this.state.photos.length === 0) return;
+        return (
+            <footer>
+                <Pagination
+                    onPrevPage={ () => this.prevPage() }
+                    onNextPage={ () => this.nextPage() }
+                    currentPage={ this.state.page } 
+                    isGalleryLoaded={ this.state.loaded }
+                />
+            </footer>
+        );
+    }
 
+    render() {
         return(
             <div className="container">
                 <Loader
                     loaded={this.state.loaded}
-                    lines={10} length="0" width="6" radius="40" color="#0a91cc">
+                    lines={10} length={0} width={6} radius={40} color="#0a91cc">
                     <div className="inner-container">
                         { this.renderImages() }
                     </div>
@@ -145,12 +158,7 @@ export default class Gallery extends Component {
                         onNext= { () => this.nextImage() }
                         onPrev= { () => this.prevImage() } />
                 </Loader>
-
-                <Pagination
-                    onPrevPage={ () => this.prevPage() }
-                    onNextPage={ () => this.nextPage() }
-                    currentPage={ this.state.page } />
-
+                { this.renderPagination() }
             </div>
         );
     }

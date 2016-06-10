@@ -18,4 +18,14 @@
       color: #fff;
     }
   }
+  &:disabled {
+    color: #ccc;
+    box-shadow: 0 0 0 1px #ccc inset;
+    cursor: auto;
+    &:hover {
+      background: transparent;
+      color: #ccc;
+      box-shadow: 0 0 0 1px #ccc inset;
+    }
+  }
 }

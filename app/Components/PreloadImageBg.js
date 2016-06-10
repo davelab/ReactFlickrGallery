@@ -46,10 +46,10 @@ export default class PreloadImageBg extends Component {
 
     render() {
         const {src, placeholder, children, ...props} = this.props;
-        const source = !this.state.loaded || this.state.error ? placeholder : src;
+        const backgroundImg = !this.state.loaded || this.state.error ? { backgroundImage: `url(${placeholder})`, backgroundSize: '50%' } : { backgroundImage: `url(${src})` };
 
         return (
-            <div style={{backgroundImage: `url(${source})`}} {...props}>
+            <div style={backgroundImg} {...props}>
                 {children}
             </div>
         );
