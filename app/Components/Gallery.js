@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import endpoint  from '../api/config'
+// http client
 import Superagent from 'superagent'
 
 import Image from './Image'
@@ -28,6 +29,9 @@ export default class Gallery extends Component {
         this.createImagesSet()
     }
 
+    // this method prepare the data set for the gallery,
+    // matching photos set and the Owner information merging
+    // the two Flickr API call in one object with the help of Promises
     createImagesSet(getPerPage = this.state.perPage, getPage = this.state.page ) {
         this.setState({
             loaded: false
@@ -51,6 +55,8 @@ export default class Gallery extends Component {
             })
     }
 
+    // Async call that fetch photos
+    // return a promise
     getFlickrImages(getPerPage, getPage) {
         return new Promise((resolve, reject) => {
             Superagent
@@ -61,6 +67,8 @@ export default class Gallery extends Component {
         })
     }
 
+    // Async call that fetch photo Owner (user)
+    // return a promise
     getUserInfo(data) {
         return new Promise((resolve, reject) => {
             Superagent
@@ -71,6 +79,8 @@ export default class Gallery extends Component {
         })
     }
 
+    // In order to open a lightbox we need the index of
+    // the clicked image and that the state open for the lightbox component
     openLightbox (e, index) {
         e.preventDefault();
         this.setState({
@@ -79,6 +89,8 @@ export default class Gallery extends Component {
         });
     }
 
+    // reset the state of currentImage an LightboxIsOpen
+    // if we want to tell to lightbox component that should be close
     closeLightbox () {
         this.setState({
             currentImage: 0,

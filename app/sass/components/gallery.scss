@@ -4,7 +4,7 @@ $avatar-size: 48px;
 $image-size: 120px !default;
 $gap: 5px !default;
 $item-per-row: 4 !default;
-
+//setup new inner container width, starting from how many hexagon we want to show in desktop view
 $shapes-row-width: $image-size * $item-per-row !default;
 $gap-row-width: $gap * $item-per-row !default;
 $row-width: $shapes-row-width + $gap-row-width !default;
@@ -51,16 +51,20 @@ $row-width: $shapes-row-width + $gap-row-width !default;
   margin-right: $gap;
   overflow: hidden;
 
+  //rules to make hexagon grid
+  // shift hexagon every 7th element starting from the 5th
   &:nth-child(7n-2) {
     margin-left: $image-size / 2 + $gap / 2;
   }
-
+  //starting from the 5th set a negative margin to fit elements into the hexagon angle
   &:nth-child(n+5) {
     margin-top:  - $image-size / 2 + $gap / 2;
   }
 
 }
 
+// Lets build the exagon shape
+// overlap 3 div and rotate them according to 120deg end -60deg
 .hexagon-shape {
   overflow: hidden;
   visibility: hidden;
@@ -102,13 +106,17 @@ $row-width: $shapes-row-width + $gap-row-width !default;
   }
 }
 
+
 @media (max-width: 1024px) {
   .container {
     width: 100%;
   }
 }
 
+//RWD: from mobile to desktop inner content width
 @media (max-width: $row-width) {
+
+  //setup new inner container width startig from how many hexagon we want to show
   $item-per-row: 2;
   $shapes-row-width: $image-size * $item-per-row;
   $gap-row-width: $gap * $item-per-row ;
@@ -118,13 +126,17 @@ $row-width: $shapes-row-width + $gap-row-width !default;
     width: $row-width;
   }
   .gallery-item{
+    //set a negative margin to fit elements into the hexagon angle
+    //starting from the third for every next elements
     &:nth-child(n+3) {
       margin-top: - $image-size / 2 + $gap / 2;
     }
+    //shift every third element with a margin left
     &:nth-child(3n) {
       margin-left: $image-size / 2 + $gap / 2;
     }
   }
+  //reset descktop child rules
   .gallery-item:nth-child(7n-2) {
        margin-left: 0px;
   }
