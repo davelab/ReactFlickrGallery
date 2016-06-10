@@ -1,5 +1,4 @@
-# ReactStarter
+# React Flickr Photo Gallery
 
-how to init the project:
-
+How to init the project:
 `npm install && npm start`
