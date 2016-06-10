@@ -131,7 +131,9 @@ export default class Gallery extends Component {
 
         return(
             <div className="container">
-                <Loader loaded={this.state.loaded}>
+                <Loader
+                    loaded={this.state.loaded}
+                    lines={10} length="0" width="6" radius="40" color="#0a91cc">
                     <div className="inner-container">
                         { this.renderImages() }
                     </div>
