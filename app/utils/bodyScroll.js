@@ -1,3 +1,7 @@
+// this module allow to block the scroll of the body if the lightbox is open
+// and also to return a the default state
+// this is an online resource
+
 // Don't try and apply overflow/padding if the scroll is already blocked
 let bodyBlocked = false;
 

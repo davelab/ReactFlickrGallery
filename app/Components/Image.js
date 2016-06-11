@@ -5,15 +5,19 @@ import PreloadImageBg from './PreloadImageBg'
 export default class Image extends Component {
     constructor(props) {
         super(props);
-        
+        //get the preload image: is a base 64 image for better performance
         this.preloadImage = utils.assets.loader;
     }
 
+    // TODO: refactor di method to a more standard and reusable one
     goToUserPage(e, url) {
         e.stopPropagation();
         window.open(url,'_blank');
     }
 
+    // render the photo owner avatar only if exist otherwise load a default one
+    // the url of the avatar image is builded with an helper method inside
+    // an external module called urlBuilder
     renderAvatar(user) {
         if (user.iconfarm == 0) {
             return (
@@ -26,6 +30,10 @@ export default class Image extends Component {
         }
     }
 
+    // render the hexagonal image item once the asset is loaded.
+    // this is the async loading image requirement for the test.
+    // the url of the image is builded with an helper method inside
+    // an external module called urlBuilder
     render() {
         const { image } = this.props;
         const { user } = image;
@@ -49,6 +57,7 @@ export default class Image extends Component {
     }
 }
 
+// define the type of properties the this component require
 Image.PropTypes = {
     image: PropTypes.object.isRequired,
     onClick: PropTypes.func,
@@ -56,8 +65,6 @@ Image.PropTypes = {
     rhombus: PropTypes.bool
 }
 
-
 Image.defaultProps = {
-    size: 's',
-    rhombus: false
+    size: 's'
 };

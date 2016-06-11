@@ -2,6 +2,9 @@ import React, {Component, PropTypes} from 'react';
 
 export default class PreloadImageBg extends Component {
 
+    // the aim of this component is to show a loader until the image asset is not loaded
+    // then it place the image as a bacground image
+
     constructor(props) {
         super(props);
 
@@ -13,7 +16,7 @@ export default class PreloadImageBg extends Component {
         this.handleLoad = this.handleLoad.bind(this);
         this.handleError = this.handleError.bind(this);
     }
-
+    // when the compoennt is mounted create an image and trigger react a action once is loaded
     componentDidMount() {
         this.image = new Image();
 

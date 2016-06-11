@@ -9,6 +9,11 @@ export default class Lightbox extends Component {
         this.state = { windowHeight: 0 };
     }
 
+    // DOM manipulation before the component recive properties and will be mounted
+    // if the lightbox is open the body scroll is blocked
+    // if the lightbox is open the window object listen to resize event and
+    // call a method that set the height of the image
+    // allowing the responsivness of the lightbox, as required
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
             utils.bodyScroll.blockScroll();
@@ -20,12 +25,15 @@ export default class Lightbox extends Component {
         }
     }
 
+    // set the window height to a state every time the window is resized
     resizeEvents() {
         this.setState({
             windowHeight: window.innerHeight || 0
         })
     }
 
+    // render the button that allow to show the previous image from the current page
+    // only if the current one is not the first
     renderPrevButton() {
         if (this.props.currentImage === 0) return;
         return (
@@ -35,6 +43,8 @@ export default class Lightbox extends Component {
         )
     }
 
+    // render the button that allow to show the nexxt image from the current page
+    // only if the current one is not the last
     renderNextButton() {
         if (this.props.currentImage === this.props.images.length - 1) return;
         return (
@@ -44,6 +54,10 @@ export default class Lightbox extends Component {
         )
     }
 
+    // render the clicked image inside the gallery
+    // with the link to the original post in flickr
+    // the close button
+    // and the information about the current image out of the images set
     renderImage() {
         const { images, currentImage } = this.props;
 
@@ -69,6 +83,7 @@ export default class Lightbox extends Component {
         )
     }
 
+    //render the entire modal only if is clicked
     renderModal() {
         if (!this.props.isOpen) return null;
 
@@ -81,7 +96,9 @@ export default class Lightbox extends Component {
             </div>
         )
     }
-    
+
+    // the Portal component append a div inside the dom  only if the rendermodal is called
+    // so only if it has a child
     render() {
         return (
             <Portal>

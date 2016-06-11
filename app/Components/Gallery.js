@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import endpoint  from '../api/config'
-// http client
+// http client to make async calls
 import Superagent from 'superagent'
 
 import Image from './Image'
@@ -89,7 +89,8 @@ export default class Gallery extends Component {
         });
     }
 
-    // reset the state of currentImage an LightboxIsOpen
+    // Lightbox inherits this method to close it self
+    // resetting the state of currentImage an LightboxIsOpen
     // if we want to tell to lightbox component that should be close
     closeLightbox () {
         this.setState({
@@ -98,18 +99,23 @@ export default class Gallery extends Component {
         });
     }
 
+    // Lightbox inherits this method for Change to next image
+    // it increments the currentImage state
     nextImage() {
         this.setState({
             currentImage: this.state.currentImage + 1,
         })
     }
-
+    // Lightbox inherits this method for Change to prev image
+    // it decrements the currentImage state
     prevImage() {
         this.setState({
             currentImage: this.state.currentImage - 1,
         })
     }
 
+    // Pagination component inherits this method to change the current and
+    // fetching new photos set by calling same method when the component is mounted for the first time
     nextPage() {
         this.setState({
             page: this.state.page + 1
@@ -117,7 +123,7 @@ export default class Gallery extends Component {
             this.createImagesSet();
         })
     }
-
+    //same as prev method but decrementing the page state
     prevPage() {
         this.setState({
             page: this.state.page - 1
@@ -126,6 +132,9 @@ export default class Gallery extends Component {
         })
     }
 
+
+    // iterate over all the photos fetched and pass necessary
+    // information to Image Item component
     renderImages() {
         return (
             this.state.photos.map((photo, i) =>
@@ -133,12 +142,12 @@ export default class Gallery extends Component {
                     key={i}
                     image={photo}
                     size="medium"
-                    rhombus={true}
                     onClick={(e) => this.openLightbox(e, i)} />
             )
         )
     }
 
+    // Render the pagination only if all the photos set are fetched from Flickr
     renderPagination() {
         if (this.state.photos.length === 0) return;
         return (
@@ -153,6 +162,7 @@ export default class Gallery extends Component {
         );
     }
 
+    // render the gallery only once all the data are fetched
     render() {
         return(
             <div className="container">

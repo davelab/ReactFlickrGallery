@@ -1,3 +1,5 @@
+// this module allow to create the url from flickr data. Enough self explenatory.
+
 const _getImageSizeCode = (size) => {
     switch (size) {
         case "small":

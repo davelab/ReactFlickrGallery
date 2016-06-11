@@ -21,7 +21,7 @@ $ npm test
 ```
 ## What the application does
 
-> 1. Navigate across pages to see different set of weird objects photos
+> 1. Navigate across pages asynchronously to see different set of weird objects photos
 > 2. Enlarge any photo with a modal, you can go to the original Flickr Photo Post
 > 3. Go to the original Flickr Photo Post
 > 4. When the photo is enlarged you can navigate across all the photos in the current page
