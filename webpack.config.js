@@ -1,44 +1,41 @@
-const path = require('path')
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
+const webpack = require('webpack');
+const path = require('path');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    devtool: "cheap-module-eval-source-map",
-    entry: [
-        'webpack-hot-middleware/client',
-        './app/index'
-    ],
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js',
-        publicPath: '/static/'
-    },
-    plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('style.css', {
-            allChunks: true
-        })
-    ],
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loaders: [ 'babel' ],
-                exclude: /node_modules/,
-                include: __dirname
-            },
-            {
-                test: /\.json$/,
-                loaders: [ 'json' ],
-                exclude: /node_modules/,
-                include: __dirname
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('css!sass')
-            }
-        ]
-    }
-}
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true,
+    contentBase: './app',
+    port: 8080
+  },
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080',
+    path.resolve(__dirname, 'app/main.js')
+  ],
+  output: {
+    path: __dirname + '/build',
+    publicPath: '/',
+    filename: './bundle.js'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+  module: {
+    loaders: [
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
+      { test: /\.js[x]?$/, include: path.resolve(__dirname, 'app'), exclude: /node_modules/, loader: 'babel-loader' },
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('style.css', {
+      allChunks: true
+    }),
+    new OpenBrowserPlugin({ url: 'http://localhost:8080' })
+  ]
+};
