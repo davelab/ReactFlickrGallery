@@ -8,7 +8,7 @@ const wrapper = shallow(<Gallery />);
 describe("<Gallery />", function() {
 
     it("Gallery contains the Loader component", function() {
-      expect(wrapper.find('Loader')).to.have.length(1);
+        expect(wrapper.find('Loader')).to.have.length(1);
     });
 
     it("Should have photos state and is an array", function() {
