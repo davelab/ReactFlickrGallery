@@ -1,0 +1,16 @@
+
+
+$lightbox-header-height: 40px;
+$lightbox-footer-height: 50px;
+
+$arrow-height: 100px;
+$arrow-width: 60px;
+
+$avatar-size: 48px;
+$image-size: 120px !default;
+$gap: 5px !default;
+$item-per-row: 4 !default;
+//setup new inner container width, starting from how many hexagon we want to show in desktop view
+$shapes-row-width: $image-size * $item-per-row !default;
+$gap-row-width: $gap * $item-per-row !default;
+$row-width: $shapes-row-width + $gap-row-width !default;
