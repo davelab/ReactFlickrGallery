@@ -1,21 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    contentBase: './app',
-    port: 8080
-  },
+  devtool: 'source-map',
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
     path.resolve(__dirname, 'app/main.js')
   ],
   output: {
@@ -33,11 +23,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('style.css', {
       allChunks: true
-    }),
-    new OpenBrowserPlugin({ url: 'http://localhost:8080' })
+    })
   ]
 };

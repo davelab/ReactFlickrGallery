@@ -5,7 +5,8 @@
   "main": "app/main.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --require ignore-styles",
-    "start": "webpack-dev-server --devtool eval --progress --hot --colors --content-base app"
+    "start": "webpack-dev-server --devtool eval --progress --hot --colors --content-base app",
+    "build": "NODE_ENV=production webpack -p --config ./webpack.production.config.js && cp ./app/index.html ./build/"
   },
   "dependencies": {
     "babel-runtime": "~6.2.0",
@@ -30,6 +31,7 @@
     "css-loader": "~0.23.0",
     "enzyme": "^2.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.21.0",
     "ignore-styles": "^3.0.0",
     "jsdom": "^9.2.1",
     "jsx-test": "^2.0.1",
